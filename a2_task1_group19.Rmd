@@ -1,12 +1,19 @@
 ---
 title: "salmon_group19"
-author: "Alicia Fennell"
+author: "Alicia Fennell, Amber McEldowney, Jennifer Truong"
 date: "2/2/2021"
-output: html_document 
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+    number_sections: true 
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
 ```
 
 
@@ -98,6 +105,29 @@ ggplot() +
 - bullet points summarizing 
 - trends... 
 
-### Tab 2 testing 
+### Seasonplots
+```{r}
+# Attach feasts package
+library(feasts)
+```
+ 
+```{r}
+# Pivot longer
+fish_ts_longer <- fish_ts %>%
+  pivot_longer(2:4,
+               names_to = "species", # Move each species to its own column
+               values_to = "n") %>%
+  group_by(species) %>% # Group by species
+  index_by(yr_mo = ~yearmonth(.)) %>% # Group by year & month
+  summarize(monthly_mean = mean(n, na.rm = TRUE)) # Summarize the mean for each species for each month
+  
+
+# Make seasonplot
+fish_ts_longer %>%
+  gg_season(y = monthly_mean)
+```
+
+- bulletpoint 1
+- bulletpoint 2
 
 ### Tab 3 woohooo!
