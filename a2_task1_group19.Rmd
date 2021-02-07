@@ -5,7 +5,6 @@ date: "2/2/2021"
 output: 
   html_document:
     code_folding: hide
-
 ---
 
 ```{r setup, include=FALSE}
@@ -30,7 +29,7 @@ This report looks at the passage of Coho, Jack Coho, and Steelhead at the Willam
 
 **Citation:** Columbia Basin Research. (n.d.). Retrieved February 07, 2021, from http://www.cbr.washington.edu/dart/query/adult_graph_text *(I'm using APA format for now, but I'm not a big fan of this...Jen)*
 
-## Adult Fish Passage at Willamette Falls Fish Ladder {.tabset}
+## Adult Fish Passage at Willamette Falls {.tabset}
 
 ### Time series
 
