@@ -21,9 +21,12 @@ knitr::opts_chunk$set(echo = TRUE,
 
 - An engaging image (with caption, including photo credit) that is relevant to the dataset
 - A brief summary (3 - 4 sentences) of the dataset, and what is included in this “report”
-- A map of the fish ladder location (you can make this in R on your own, or include an existing map appropriately licensed, with attribution)
-- A professionally formatted data citation
 
+### Map of Willamette Falls
+- A map of the fish ladder location (you can make this in R on your own, or include an existing map appropriately licensed, with attribution)
+**Figure _.** Location of the fish ladder in Willamette Falls, Oregon.
+
+**Citation:** Columbia Basin Research. (n.d.). Retrieved February 07, 2021, from http://www.cbr.washington.edu/dart/query/adult_graph_text *(I'm using APA format for now, but I'm not a big fan of this...Jen)*
 
 ## Making tabs (some type of title) {.tabset}
 
