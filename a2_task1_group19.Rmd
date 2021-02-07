@@ -1,13 +1,11 @@
 ---
-title: "salmon_group19"
+title: "Assignment 2 Task 1 Group 19"
 author: "Alicia Fennell, Amber McEldowney, Jennifer Truong"
 date: "2/2/2021"
 output: 
   html_document:
     code_folding: hide
-    toc: true
-    toc_float: true
-    number_sections: true 
+
 ---
 
 ```{r setup, include=FALSE}
@@ -19,17 +17,16 @@ knitr::opts_chunk$set(echo = TRUE,
 
 ## Overview 
 
-- An engaging image (with caption, including photo credit) that is relevant to the dataset
-- A brief summary (3 - 4 sentences) of the dataset, and what is included in this “report”
-- A map of the fish ladder location (you can make this in R on your own, or include an existing map appropriately licensed, with attribution)
-- A professionally formatted data citation
+Data for this project comes from Columbia River DART (Data Access in Real Time); the observations used in this project span from January 1, 2001 to December 31, 2010. Adult salmon passage was visually counted and recorded at major dams on Columbia and Snake Rivers. 
+
+This report looks at the passage of Coho, Jack Coho, and Steelhead at the Willamette Falls fish ladder in Oregon. Below, we have explored the data using time series plots, seasonplots, and summary statistics and analysis. 
 
 
-## Making tabs (some type of title) {.tabset}
+![*Willamette Falls in Oregon. Photo: Willamette Falls Legacy Project*](photo.jpg)
+
+## Adult Fish Passage at Willamette Falls Fish Ladder {.tabset}
 
 ### Time series
-
-Need to figure out how to fold code 
 
 ```{r}
 
@@ -52,10 +49,10 @@ fish_ts <- fish_af %>%
   as_tsibble(key = NULL, index = date)
 
 ## Plot the time series data
-ggplot() +
-  geom_line(data = fish_ts, aes(x = date, y = coho)) +
-  labs(x = "Date",
-       y = "Number of Coho")
+# ggplot() +
+#   geom_line(data = fish_ts, aes(x = date, y = coho)) +
+#   labs(x = "Date",
+#        y = "Number of Coho")
 
 ## Make data frames for each fish by monthyears  
 coho_month <- fish_ts %>% 
