@@ -2,10 +2,102 @@
 title: "salmon_group19"
 author: "Alicia Fennell"
 date: "2/2/2021"
-output: html_document
+output: html_document 
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+## Overview 
+
+- An engaging image (with caption, including photo credit) that is relevant to the dataset
+- A brief summary (3 - 4 sentences) of the dataset, and what is included in this “report”
+- A map of the fish ladder location (you can make this in R on your own, or include an existing map appropriately licensed, with attribution)
+- A professionally formatted data citation
+
+
+## Making tabs (some type of title) {.tabset}
+
+### Time series
+
+Need to figure out how to fold code 
+
+```{r}
+
+## Read in packages 
+library(tidyverse)
+library(here)
+library(janitor)
+library(lubridate)
+library(tsibble)
+
+## Read in the data, keep only the columns of interest, replace "NA" with 0, and clean names
+fish_af <- read.csv(here("data", "willamette_fish_passage.csv")) %>% 
+  select("Date", "Coho", "Jack.Coho", "Steelhead") %>% 
+  mutate_all(~replace(., is.na(.), 0)) %>% 
+  clean_names()
+  
+## Convert to tsibble 
+fish_ts <- fish_af %>% 
+  mutate(date = lubridate::mdy(date)) %>% 
+  as_tsibble(key = NULL, index = date)
+
+## Plot the time series data
+ggplot() +
+  geom_line(data = fish_ts, aes(x = date, y = coho)) +
+  labs(x = "Date",
+       y = "Number of Coho")
+
+## Make data frames for each fish by monthyears  
+coho_month <- fish_ts %>% 
+  index_by(yr_mo = ~yearmonth(.)) %>% 
+  summarize(monthly_mean_coho = mean(coho, na.rm = TRUE))
+
+jack_month <- fish_ts %>% 
+  index_by(yr_mo = ~yearmonth(.)) %>% 
+  summarize(monthly_mean_jack = mean(jack_coho, na.rm = TRUE))
+
+steel_month <- fish_ts %>% 
+  index_by(yr_mo = ~yearmonth(.)) %>% 
+  summarize(monthly_mean_steel = mean(steelhead, na.rm = TRUE))
+```
+
+
+```{r}
+## Plot time series fish runs 
+ggplot() +
+  geom_line(data = coho_month,
+       aes(x = yr_mo,
+           y = monthly_mean_coho,
+           colour = "Coho"),
+        alpha = 0.7,
+        size = 1.2) +
+  geom_line(data = jack_month,
+       aes(x = yr_mo,
+           y = monthly_mean_jack,
+           colour = "Jack Coho"),
+       alpha = 0.7,
+       size = 1.2) +
+  geom_line(data = steel_month,
+       aes(x = yr_mo,
+           y = monthly_mean_steel,
+           colour = "Steelhead"),
+       alpha = 0.7,
+      size = 1.2) +
+  labs(x = "Month and Year",
+       y = "Number of Fish",
+       title = "Adult Passage of Coho, Jack Coho, and Steelhead at Willamette Falls") +
+  theme_minimal() +
+  scale_colour_manual(values = c("dodgerblue4", "darkorchid4", "springgreen4")) 
+
+  
+```
+
+- bullet points summarizing 
+- trends... 
+
+### Tab 2 testing 
+
+### Tab 3 woohooo!
