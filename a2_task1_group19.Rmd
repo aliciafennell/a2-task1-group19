@@ -20,7 +20,6 @@ Data for this project comes from Columbia River DART (Data Access in Real Time);
 
 This report looks at the passage of Coho, Jack Coho, and Steelhead at the Willamette Falls fish ladder in Oregon. Below, we have explored the data using time series plots, seasonplots, and summary statistics and analysis. 
 
-
 ![*Willamette Falls in Oregon. Photo: Willamette Falls Legacy Project*](photo.jpg)
 
 ### Map of Willamette Falls
