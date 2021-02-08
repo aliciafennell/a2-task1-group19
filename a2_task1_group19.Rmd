@@ -20,8 +20,6 @@ knitr::opts_chunk$set(
 
 ## Overview 
 
-Testing... 
-
 - **Summary** This report explores adult fish passage recorded from 2001-01-01 to 2010-12-31 at the Willamette Falls fish ladder on the Willamette River, Oregon.  This report is focused on Coho, Jack Coho, and Steelhead species.  First, a time series graph visualized time series data by month and year to explore trends over the 10-year time period.  Second, a season plot is created to explore seasonal trends for each species.  Lastly, a total counts figure illustrates the total number of observed fish passage for each species over the 10-year period.
 
 ### Image of Willamette Falls, OR
@@ -84,28 +82,28 @@ steel_month <- fish_ts %>%
 
 
 ```{r}
-## Plot time series fish runs 
+## Plot time series fish passage for the three species with month/year data 
 ggplot() +
   geom_line(data = coho_month,
        aes(x = yr_mo,
            y = monthly_mean_coho,
            colour = "Coho"),
-        alpha = 0.7,
-        size = 1.2) +
+        alpha = 0.8,
+        size = 1) +
   geom_line(data = jack_month,
        aes(x = yr_mo,
            y = monthly_mean_jack,
            colour = "Jack Coho"),
-       alpha = 0.7,
-       size = 1.2) +
+       alpha = 0.8,
+       size = 1) +
   geom_line(data = steel_month,
        aes(x = yr_mo,
            y = monthly_mean_steel,
            colour = "Steelhead"),
-       alpha = 0.7,
-      size = 1.2) +
+       alpha = 0.8,
+      size = 1) +
   labs(x = "Month and Year",
-       y = "Number of Fish",
+       y = "Number of Fish Observed",
        colour = "Species",
        title = "Adult Passage of Coho, Jack Coho, and Steelhead at Willamette Falls") +
   theme_minimal() +
@@ -114,8 +112,10 @@ ggplot() +
   
 ```
 
-- bullet points summarizing 
-- trends... 
+- Between 2001 and 2010, the number of Coho observed increased over time, reaching the highest count in the last year of observations.  
+- Jack Coho observed counts are low through all the years of observation in comparison with Steelhead and some years of Coho.
+- There is seasonality in the data; we see high and low points each year for each species. 
+- It appears that Coho Salmon pass through the fish ladder later in the year than Steelhead Trout, and around the same time as Jack Coho. 
 
 ### Seasonplots
 ```{r}
