@@ -23,8 +23,9 @@ knitr::opts_chunk$set(
 - **Summary** This report explores adult fish passage recorded from 2001-01-01 to 2010-12-31 at the Willamette Falls fish ladder on the Willamette River, Oregon.  This report is focused on Coho, Jack Coho, and Steelhead species.  First, a time series graph visualized time series data by month and year to explore trends over the 10-year time period.  Second, a season plot is created to explore seasonal trends for each species.  Lastly, a total counts figure illustrates the total number of observed fish passage for each species over the 10-year period.
 
 ### Image of Willamette Falls, OR
-```{r, out.width='50%', fig.align='center', fig.cap='Photo of Willamette Falls, Oregon.  *Credit: EncMstr, CC BY-SA 3.0 <http://creativecommons.org/licenses/by-sa/3.0/>, via Wikimedia Commons'}
-knitr::include_graphics('willamette_falls.jpeg')*
+```{r, out.width='50%', fig.align='center', fig.cap='Photo of Willamette Falls, Oregon.  Credit: EncMstr, CC BY-SA 3.0 <http://creativecommons.org/licenses/by-sa/3.0/>, via Wikimedia Commons'}
+
+knitr::include_graphics('willamette_falls.jpeg')
 ```
 
 
