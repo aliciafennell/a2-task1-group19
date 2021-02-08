@@ -1,12 +1,12 @@
 ---
-title: "salmon_group19"
+title: "Assignment 2 Task 1 Group 19"
 author: "Alicia Fennell, Amber McEldowney, Jennifer Truong"
 date: "2/2/2021"
 output: 
   html_document:
     theme: flatly
     code_folding: hide
- 
+
 ---
 
 ```{r setup, include=FALSE}
@@ -20,6 +20,8 @@ knitr::opts_chunk$set(
 
 ## Overview 
 
+Testing... 
+
 - **Summary** This report explores adult fish passage recorded from 2001-01-01 to 2010-12-31 at the Willamette Falls fish ladder on the Willamette River, Oregon.  This report is focused on Coho, Jack Coho, and Steelhead species.  First, a time series graph visualized time series data by month and year to explore trends over the 10-year time period.  Second, a season plot is created to explore seasonal trends for each species.  Lastly, a total counts figure illustrates the total number of observed fish passage for each species over the 10-year period.
 
 ### Image of Willamette Falls, OR
@@ -29,17 +31,16 @@ knitr::include_graphics('willamette_falls.jpeg')
 ```
 
 
+
 ### Map of Willamette Falls
 - A map of the fish ladder location (you can make this in R on your own, or include an existing map appropriately licensed, with attribution)
 **Figure _.** Location of the fish ladder in Willamette Falls, Oregon.
 
 **Citation:** Columbia Basin Research. (n.d.). Retrieved February 07, 2021, from http://www.cbr.washington.edu/dart/query/adult_graph_text *(I'm using APA format for now, but I'm not a big fan of this...Jen)*
 
-## Making tabs (some type of title) {.tabset}
+## Adult Fish Passage at Willamette Falls {.tabset}
 
 ### Time series
-
-Need to figure out how to fold code 
 
 ```{r}
 
@@ -62,10 +63,10 @@ fish_ts <- fish_af %>%
   as_tsibble(key = NULL, index = date)
 
 ## Plot the time series data
-ggplot() +
-  geom_line(data = fish_ts, aes(x = date, y = coho)) +
-  labs(x = "Date",
-       y = "Number of Coho")
+# ggplot() +
+#   geom_line(data = fish_ts, aes(x = date, y = coho)) +
+#   labs(x = "Date",
+#        y = "Number of Coho")
 
 ## Make data frames for each fish by monthyears  
 coho_month <- fish_ts %>% 
@@ -151,10 +152,19 @@ coho_year <- fish_ts %>%
 jack_year <- fish_ts %>% 
   index_by(yr = ~year(.)) %>% 
   summarize(year_count_jack = sum(jack_coho, na.rm = TRUE))
+steel_year <- fish_ts %>% 
+  index_by(yr = ~year(.)) %>% 
+  summarize(year_count_steel = sum(steelhead, na.rm = TRUE))
+
+
+jack_year <- fish_ts %>% 
+  index_by(yr = ~year(.)) %>% 
+  summarize(year_count_jack = sum(jack_coho, na.rm = TRUE))
 
 steel_year <- fish_ts %>% 
   index_by(yr = ~year(.)) %>% 
   summarize(year_count_steel = sum(steelhead, na.rm = TRUE))
+
 
 ## Plot annual totals for fish passage, for each of the 3 species
 ggplot() +
@@ -185,6 +195,12 @@ ggplot() +
   scale_colour_manual(values = c("dodgerblue4", "darkorchid4", "springgreen4")) 
 ```
 
+```
+## Summary
+- bulletpoint 1
+- bulletpoint 2
+=======
+
 
 **Figure 1.3** Annual toal Coho, Jack Coho, and Steelhead passage observation were recorded at the Willamette Falls fish ladder on the Willamette River (Oregon) from 2001-2010. Data were shared by and accessed from Columbia River DART (Data Access in Real Time).
 
@@ -195,3 +211,4 @@ ggplot() +
 - Coho observations increased drastically, from ~5,000/year to ~25,000/year in 2009.
 
 - Jack Coho observations remained relatively consistent over the 10-year period.
+
