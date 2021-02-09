@@ -39,6 +39,7 @@ library(tmap)
 library(sp)
 library(ggmap)
 library(janitor)
+library(here)
 
 # Unzip US state boundary shapefile
 #unzip(here("data", "tl_2017_us_state.zip"),
@@ -195,7 +196,7 @@ fish_ts_longer %>%
     strip.background = element_rect(color = fish_color,
                                     fill = fish_color),
     strip.text = element_text(color = "white")
-  )
+  ) 
 ```
 
 - The mean counts for Coho and Jack Coho peak during the months of August to October, while the mean count for Steelhead peak around May and June. 
