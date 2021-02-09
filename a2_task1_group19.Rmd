@@ -31,6 +31,48 @@ knitr::include_graphics('willamette_falls.jpeg')
 
 
 ### Map of Willamette Falls
+```{r Create map}
+# Attach package
+library(tidyverse)
+library(sf)
+library(tmap)
+library(sp)
+library(ggmap)
+library(janitor)
+
+# Unzip US state boundary shapefile
+#unzip(here("data", "tl_2017_us_state.zip"),
+      #exdir = here("data","us_zip_shapefile"),
+      #overwrite = FALSE)
+
+# Read in shapefile
+oregon <- st_read(here("data", "us_zip_shapefile", "tl_2017_us_state.shp")) %>%
+  clean_names() %>%
+  filter(name == "Oregon")
+
+# Transform projection of Oregon shapefile to NAD83...just in case
+oregon <- st_transform(oregon, crs = st_crs(4269))
+
+# Create point for Willamette Falls
+willamette_x = 45.35239
+willamette_y = -122.61763
+willamette_coord <- cbind(willamette_x, willamette_y)
+willamette_point <- SpatialPoints(coords = willamette_coord) 
+
+# Define NAD83 projection (EPSG: 4269) to match Oregon shapefile
+
+# Combine the two datasets together to create a map
+tm_shape(oregon) +
+  tm_fill() +
+  tm_shape(willamette_point,
+           projection = 4269) +
+  tm_bubbles(col = "red", size = 0.5)
+
+# Data source for OR boundary: https://catalog.data.gov/dataset/tiger-line-shapefile-2017-nation-u-s-current-state-and-equivalent-national
+
+# Data source for Willamette Falls coordinates: https://geohack.toolforge.org/geohack.php?pagename=Willamette_Falls&params=45.35239_N_122.61763_W_type:landmark_region:US-OR_scale:50000
+```
+
 - A map of the fish ladder location (you can make this in R on your own, or include an existing map appropriately licensed, with attribution)
 **Figure _.** Location of the fish ladder in Willamette Falls, Oregon.
 
@@ -130,17 +172,35 @@ fish_ts_longer <- fish_ts %>%
                names_to = "species", # Move each species to its own column
                values_to = "n") %>%
   group_by(species) %>% # Group by species
+  mutate(species = case_when(
+    species == "coho" ~ "Coho", 
+    species == "jack_coho" ~ "Jack Coho", 
+    species == "steelhead" ~ "Steelhead")
+  ) %>%
   index_by(yr_mo = ~yearmonth(.)) %>% # Group by year & month
   summarize(monthly_mean = mean(n, na.rm = TRUE)) # Summarize the mean for each species for each month
-  
+
+# Make vector for species color
+fish_color = c("Coho" = "dodgerblue4", "Jack Coho" = "darkorchid4", "Steelhead" = "springgreen4")
 
 # Make seasonplot
 fish_ts_longer %>%
-  gg_season(y = monthly_mean)
+  gg_season(y = monthly_mean) +
+  labs(x = "Month",
+       y = "Mean Number of Fish Observed",
+       colour = "Year",
+       title = "Seasonal Adult Passage of Coho, Jack Coho, and Steelhead at Willamette Falls") +
+  theme_minimal() +
+  theme(
+    strip.background = element_rect(color = fish_color,
+                                    fill = fish_color),
+    strip.text = element_text(color = "white")
+  )
 ```
 
-- bulletpoint 1
-- bulletpoint 2
+- The mean counts for Coho and Jack Coho peak during the months of August to October, while the mean count for Steelhead peak around May and June. 
+
+- Coho had the highest peak mean count during the years 2009 and 2010. Jack Coho has the highest peak mean count during the year 2008. Steelhead had higher peak mean counts during the years 2002-2004.
 
 ### Summary Statistics and Analysis
 ```{r}
