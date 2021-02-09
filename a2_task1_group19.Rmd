@@ -1,7 +1,7 @@
 ---
 title: "Assignment 2 Task 1 Group 19"
 author: "Alicia Fennell, Amber McEldowney, Jennifer Truong"
-date: "2/2/2021"
+date: "2/9/2021"
 output: 
   html_document:
     theme: flatly
@@ -20,15 +20,16 @@ knitr::opts_chunk$set(
 
 ## Overview 
 
-- **Summary** This report explores adult fish passage recorded from 2001-01-01 to 2010-12-31 at the Willamette Falls fish ladder on the Willamette River, Oregon.  This report is focused on Coho, Jack Coho, and Steelhead species.  First, a time series graph visualized time series data by month and year to explore trends over the 10-year time period.  Second, a season plot is created to explore seasonal trends for each species.  Lastly, a total counts figure illustrates the total number of observed fish passage for each species over the 10-year period.
+**Summary**: This report explores adult fish passage recorded from 2001-01-01 to 2010-12-31 at the Willamette Falls fish ladder on the Willamette River, Oregon.  This report is focused on Coho, Jack Coho, and Steelhead species.  First, a time series graph visualized time series data by month and year to explore trends over the 10-year time period.  Second, a season plot is created to explore seasonal trends for each species.  Lastly, a total counts figure illustrates the total number of observed fish passage for each species over the 10-year period.
 
-### Image of Willamette Falls, OR
+**Image of Willamette Falls, OR**:
 ```{r, out.width='50%', fig.align='center', fig.cap='Photo of Willamette Falls, Oregon.  Credit: EncMstr, CC BY-SA 3.0 <http://creativecommons.org/licenses/by-sa/3.0/>, via Wikimedia Commons'}
 
 knitr::include_graphics('willamette_falls.jpeg')
 ```
 
-### Map of Willamette Falls
+**Map of Willamette Falls, OR**:
+
 ```{r, out.width='50%', fig.align='center', fig.cap='Map of the location of the fish ladder in Willamette Falls, Oregon.  Credit: Google Maps'}
 
 knitr::include_graphics('willamette_falls_map.png')
@@ -112,6 +113,10 @@ ggplot() +
   
 ```
 
+**Figure 1.1** Time series plot of Coho, Jack Coho, and Steelhead adult fish passage at the Willamette Falls fish ladder between 2001 and 2010, plotting the average fish numbers for each month. Data were shared by and accessed from Columbia River DART (Data Access in Real Time).
+
+**Summary**
+
 - Between 2001 and 2010, the number of Coho observed increased over time, reaching the highest count in the last year of observations.  
 - Jack Coho observed counts are low through all the years of observation in comparison with Steelhead and some years of Coho.
 - There is seasonality in the data; we see high and low points each year for each species. 
@@ -153,8 +158,13 @@ fish_ts_longer %>%
     strip.background = element_rect(color = fish_color,
                                     fill = fish_color),
     strip.text = element_text(color = "white")
-  )
+  ) 
+
 ```
+
+**Figure 1.2** Passage of Coho, Jack Coho, and Steelhead at Willamette Falls for all years between 2001 and 2010, plotted to show the seasonality. Data were shared by and accessed from Columbia River DART (Data Access in Real Time).
+
+**Summary**
 
 - The mean counts for Coho and Jack Coho peak during the months of August to October, while the mean count for Steelhead peak around May and June. 
 
@@ -213,7 +223,7 @@ ggplot() +
   scale_colour_manual(values = c("dodgerblue4", "darkorchid4", "springgreen4")) 
 ```
 
-**Figure 1.3** Annual toal Coho, Jack Coho, and Steelhead passage observation were recorded at the Willamette Falls fish ladder on the Willamette River (Oregon) from 2001-2010. Data were shared by and accessed from Columbia River DART (Data Access in Real Time).
+**Figure 1.3** Annual total Coho, Jack Coho, and Steelhead passage observations were recorded at the Willamette Falls fish ladder on the Willamette River (Oregon) from 2001-2010. Data were shared by and accessed from Columbia River DART (Data Access in Real Time). 
 
 **Summary**
 
