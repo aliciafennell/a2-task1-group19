@@ -213,13 +213,6 @@ ggplot() +
   scale_colour_manual(values = c("dodgerblue4", "darkorchid4", "springgreen4")) 
 ```
 
-```
-## Summary
-- bulletpoint 1
-- bulletpoint 2
-=======
-
-
 **Figure 1.3** Annual toal Coho, Jack Coho, and Steelhead passage observation were recorded at the Willamette Falls fish ladder on the Willamette River (Oregon) from 2001-2010. Data were shared by and accessed from Columbia River DART (Data Access in Real Time).
 
 **Summary**
