@@ -33,9 +33,11 @@ knitr::include_graphics('willamette_falls.jpeg')
 ### Map of Willamette Falls
 ```{r Create map}
 # Attach package
+library(tidyverse)
 library(sf)
 library(tmap)
 library(sp)
+library(ggmap)
 library(janitor)
 
 # Unzip US state boundary shapefile
@@ -48,17 +50,22 @@ oregon <- st_read(here("data", "us_zip_shapefile", "tl_2017_us_state.shp")) %>%
   clean_names() %>%
   filter(name == "Oregon")
 
+# Transform projection of Oregon shapefile to NAD83...just in case
+oregon <- st_transform(oregon, crs = st_crs(4269))
+
 # Create point for Willamette Falls
 willamette_x = 45.35239
 willamette_y = -122.61763
 willamette_coord <- cbind(willamette_x, willamette_y)
-willamette_point <- SpatialPoints(coords = willamette_coord,
-                                  proj4string = CRS("+proj=longlat +datum=NAD83")) # Define NAD83 projection to match Oregon shapefile
+willamette_point <- SpatialPoints(coords = willamette_coord) 
+
+# Define NAD83 projection (EPSG: 4269) to match Oregon shapefile
 
 # Combine the two datasets together to create a map
 tm_shape(oregon) +
   tm_fill() +
-  tm_shape(willamette_point) +
+  tm_shape(willamette_point,
+           projection = 4269) +
   tm_bubbles(col = "red", size = 0.5)
 
 # Data source for OR boundary: https://catalog.data.gov/dataset/tiger-line-shapefile-2017-nation-u-s-current-state-and-equivalent-national
